@@ -1,0 +1,26 @@
+---
+external: false
+draft: false
+title: Welcome! About the project
+description: I'm apparently one of those opinionated guys with a blog now...
+date: 2024-05-22
+---
+
+👋 Hello! And welcome to a little slice of my brain out on the world wide web.
+
+I plan to post *something* every month or so - with no strict promises as to exactly what that will be. Often, it will be thoughts about data engineering, and the broader data scene as a whole. Other times, it may be a blog related to other passions, be it climbing, backpacking, or someting else entirely. 
+
+I am primarily writing this for myself, but I hope to at least get some folks who read, criticize, and collaborate on these posts. One thing that will always be certain is that nothing is sponsored, bought, or influenced. 100% USDA organic thoughts straight from my gourd.
+
+Now back to the show...
+---
+
+If you take a look through my github repos, you will see a series of long dead websites where I attempted to do something akin to this before.
+ 
+First, it was a bright-eyed student out of college who felt like he needed a portfolio page. Next, it was me trying to connect with my passion for writing by starting to create trip reports for whatever shenanigans I got myself into outdoors. Tech stacks were different, CSS competency waxed and waned, and they both had vastly different long term goals. The only real common thread between them is that they no longer exist in any real sense - they are purely files in a repo, floating through the internet like a leaf in the wind.
+
+This time though... it's probably different? I mean I am pretty sure, but truly only time will tell. What I do know is that I am excited to have an outlet, and this is by far the best and most freeing tech stack I could have chosen. The long and short of it is a simple static webpage generated with [Astro](https://astro.build/) and hosted via S3 web hosting. It isn't fancy, but that is the goal if I am being honest. I want to eliminate complexity from my life, not add to it.
+
+A blog post on exactly how I built this page will be coming soon... but until then, see you next time!
+
+-- HP

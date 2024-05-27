@@ -4,7 +4,6 @@
 export const SITE_TITLE = "Harrison Palmer";
 export const SITE_DESCRIPTION =
   "Welcome to my page! I'm a data engineer and adventure blogger. I write about my travels, data projects, and other random thoughts.";
-export const TWITTER_HANDLE = "@yourtwitterhandle";
 export const MY_NAME = "Harrison Palmer";
 
 // setup in astro.config.mjs

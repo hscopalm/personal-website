@@ -1,0 +1,19 @@
+---
+const { url, date, title } = Astro.props;
+---
+
+<li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
+    <div class="title">
+        <a href={url} target="_blank" class="unset hover:text-text-link">
+            <span>{title}</span>
+            <span>
+                <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
+            </span>
+        </a>
+    </div>
+    <div class="text-text-muted text-sm italic pt-1">
+        <time>
+            {date}
+        </time>
+    </div>
+</li>

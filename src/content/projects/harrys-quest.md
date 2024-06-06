@@ -1,7 +1,10 @@
 ---
-draft: false
 title: First (and deprecated) attempt at a personal blog
-description: Not my finest work
-date: 2023-12-29
+subtitle: Not my finest work
+author: Harrison Palmer
+pubDate: 2023-12-29
+
+draft: false
+
 url: https://github.com/hscopalm/harrys-quest
 ---

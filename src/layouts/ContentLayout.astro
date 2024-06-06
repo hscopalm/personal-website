@@ -6,6 +6,7 @@
 
 // Import the global.css file here so that it is included on
 import "../styles/global.css";
+import { formatDateString } from "../lib/dates.ts";
 
 import GoogleFont from "./GoogleFont.astro";
 import FontAwesome from "./FontAwesome.astro";
@@ -14,17 +15,10 @@ import Favicon from "./Favicon.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-export interface Props {
-  title: string;
-  date: Date;
-}
 
-const { title, date } = Astro.props;
-const formattedDate = new Date(date).toLocaleDateString("en-us", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const { description, title, pubDate } = Astro.props.frontmatter;
+
+console.log(Astro.props)
 ---
 
 <!DOCTYPE html>
@@ -47,11 +41,12 @@ const formattedDate = new Date(date).toLocaleDateString("en-us", {
     <Header />
     <main id="main">
       <section class="blog-post prose max-w-none prose-newspaper">
-        <h1 class="
-            m-0 pt-1 mb-[0.375em] 
-            after:mt-6 after:content-[''] after:block after:h-[1px] after:w-[100%] after:border-b-[1px] after:border-current  
-        ">{title}</h1>
-        <time class="block mb-[2em] text-text-muted">{formattedDate}</time>
+        <h1 class="m-0 pt-1 mb-[0.375em] after:mt-6 after:content-[''] after:block after:h-[1px] after:w-[100%] after:border-b-[1px] after:border-current">
+          {title}
+        </h1>
+        <time class="block mb-[2em] text-text-muted">
+          {formatDateString(pubDate)}
+        </time>
         <slot name="content" />
       </section>
     </main>

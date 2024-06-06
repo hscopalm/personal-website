@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { href: url } = Astro.url;
+const { entry } = Astro.props;
+const { data } = entry;
+
+const { Content } = await entry.render();
+---
+
+<!-- <ContentLayout title={'change me'} date={Date.now()}></ContentLayout> -->
+<ContentLayout {url} frontmatter={data}>
+    <!-- <BlogPostMeta
+      title={frontmatter.title}
+      description={frontmatter.external ? undefined : frontmatter.description}
+      publishDate={frontmatter.date.toISOString()}
+      pagePath={`/blog/${slug}`}
+      ogImageAbsoluteUrl={ogImageAbsoluteUrl}
+      slot="meta"
+    /> -->
+    <Content slot="content"/>
+</ContentLayout>

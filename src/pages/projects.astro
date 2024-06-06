@@ -1,59 +1,30 @@
 ---
-import { readAll } from "../lib/markdoc/read";
-import { project } from "../lib/markdoc/frontmatter.schema";
+import { getCollection } from "astro:content";
+import { SITE_TITLE } from "../config";
+import { formatDateString } from "../lib/dates.ts";
+
 import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
-import { SITE_TITLE } from "../config";
+import ProjectPost from "../components/ProjectPost.astro";
 
-const projects = await readAll({
-  directory: "projects",
-  frontmatterSchema: project,
+// const allBlogs = await getCollection("blog");
+const publishedProjects = await getCollection('projects', ({ data }) => {
+  return data.draft !== true;
 });
 
-const sortedProjects = projects
-  .filter((p) => p.frontmatter.draft !== true)
-  .sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).valueOf() -
-      new Date(a.frontmatter.date).valueOf()
-  );
+const sortedProjects = publishedProjects.sort((a, b) => {
+  return new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf();
+});
 ---
 
 <PageLayout>
-  <PageMeta title={`Projects | ${SITE_TITLE}`} slot="meta" />
+  <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
   <section slot="main">
     <ul>
       {
-        sortedProjects.map((project) => {
-          const formattedDate = new Date(
-            project.frontmatter.date
-          ).toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          });
-          return (
-            <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
-              <div class="title">
-                <a
-                  href={project.frontmatter.url}
-                  target="_blank"
-                  class="unset hover:text-text-link"
-                >
-                  <span>{project.frontmatter.title}</span>
-                  <span>
-                    <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
-                  </span>
-                </a>
-              </div>
-              <div class="text-text-muted text-sm italic pt-1">
-                <time datetime={project.frontmatter.date.toISOString()}>
-                  {formattedDate}
-                </time>
-              </div>
-            </li>
-          );
-        })
+        sortedProjects.map((blog) => (
+          <ProjectPost url={blog.data.url} title={blog.data.title} date={formatDateString(blog.data.pubDate)} />
+        ))
       }
     </ul>
   </section>

@@ -1,50 +1,76 @@
-# Astro Starter Kit: Minimal
+# Harrison Palmer's Personal Website
 
-```sh
-npm create astro@latest -- --template minimal
+Personal portfolio and blog website hosted at [harrisonpalmer.xyz](https://www.harrisonpalmer.xyz)
+
+## Overview
+
+This website serves as a personal portfolio and blog, showcasing my professional work as a data engineer and personal adventures as an outdoor enthusiast. The site features:
+
+- Professional background and expertise
+- Technical blog posts
+- Travel and outdoor adventure writing
+- Project showcases
+- Contact information and social links
+
+## Technology Stack
+
+Built with:
+- [Astro](https://astro.build/) - Core web framework
+- [Blogster](https://github.com/flexdinesh/blogster) - Blog template/theme
+- Modern web technologies focusing on performance and simplicity
+
+## Architecture
+
+The site follows a static-site architecture, providing:
+- Fast page loads
+- Excellent SEO optimization
+- Simple deployment and hosting
+- Dark/light mode toggle
+- Responsive design for all devices
+
+## Content Sections
+
+- **Home**: Introduction and overview
+- **Blog**: Technical writing and outdoor adventure posts
+- **Projects**: Showcase of technical work
+- **Resume**: Professional background
+
+## Professional Focus
+
+Highlights expertise in:
+- Data Engineering
+- Infrastructure Development
+- Cloud Technologies (AWS)
+- Apache Kafka
+- Apache Airflow
+- dbt
+- Snowflake
+- Python
+- SQL
+
+## Development
+
+To run locally:
+```bash
+Install dependencies
+npm install
+Start development server
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deployment
 
-## 🚀 Project Structure
+The site is deployed using modern static hosting platforms, ensuring:
+- Continuous deployment
+- SSL/TLS security
+- Global CDN distribution
+- High availability
 
-Inside of your Astro project, you'll see the following folders and files:
+## Contact
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Todo
-- provided pubDate is taken is as PT, but rendered as UTC and can change the date
+Connect with me:
+- GitHub
+- LinkedIn
+- Email
+- Schedule a meeting

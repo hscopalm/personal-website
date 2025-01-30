@@ -81,10 +81,10 @@ Deployed using modern static hosting with:
 
 ## Connect With Me 🤝
 
-- [GitHub](https://github.com/yourusername)
-- [LinkedIn](https://linkedin.com/in/yourusername)
-- [Email](mailto:your.email@example.com)
-- [Schedule a Meeting](https://calendly.com/yourusername)
+- [GitHub](https://github.com/hscopalm)
+- [LinkedIn](https://linkedin.com/in/harrisonpalmer)
+- [Email](mailto:harrisonpalmer@gmail.com)
+- [Schedule a Meeting](https://calendar.app.google/QWU1CL1aAyjVc2wm7)
 
 ---
 

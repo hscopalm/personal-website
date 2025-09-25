@@ -27,10 +27,57 @@ const imageList = await Promise.all(
       alt: filename,
       original: image.default.src,
       width: optimizedImage.attributes.width,
-      height: optimizedImage.attributes.height
+      height: optimizedImage.attributes.height,
+      filename: filename
     };
   })
 );
+
+// Custom ordering based on your curation
+const customOrder = [
+  "AR8A0024",   // starry sky, silhouettes
+  "AR8A0100",   // Milky Way
+  "IMG_123456", // night sky + trees
+  "IMG_7155",   // sunset over water
+  "IMG_5127",   // sunset glow through trees
+  "IMG_5256",   // bridge in golden light
+  "IMG_3063",   // desert cliffs
+  "IMG_4130",   // blue distant vista
+  "IMG_5008",   // warm alleyway
+  "IMG_2808",   // waterfall in forest
+  "IMG_0159",   // bald eagle, blue sky
+  "IMG_5280",   // heron in tree, blue sky
+  "IMG_0697",   // coyote in grass
+  "IMG_2044",   // sparrow in grass
+  "IMG_3374",   // bird on fence post
+  "IMG_1922",   // duck with earthy tones
+  "IMG_1435",   // red-winged blackbird
+  "IMG_4300",   // bird in greenery
+  "IMG_4286",   // bird in blossoms
+  "IMG_6038",   // orca breaching
+  "IMG_6366",   // planes crossing w/ smoke
+  "IMG_6402"    // planes in formation
+];
+
+// Sort images according to custom order
+imageList.sort((a, b) => {
+  const aIndex = customOrder.indexOf(a.filename);
+  const bIndex = customOrder.indexOf(b.filename);
+  
+  // If both images are in the custom order, sort by their position
+  if (aIndex !== -1 && bIndex !== -1) {
+    return aIndex - bIndex;
+  }
+  
+  // If only 'a' is in custom order, it goes first
+  if (aIndex !== -1) return -1;
+  
+  // If only 'b' is in custom order, it goes first
+  if (bIndex !== -1) return 1;
+  
+  // If neither is in custom order, sort alphabetically
+  return a.filename.localeCompare(b.filename);
+});
 ---
 
 <PageLayout>

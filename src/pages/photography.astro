@@ -1,0 +1,207 @@
+---
+import { getImage } from 'astro:assets';
+import { SITE_TITLE } from "../config";
+
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+
+// Import all images from the photography folder
+const images = import.meta.glob('../assets/photography/*.{jpeg,jpg,png,gif}');
+
+// Process images for display
+const imageList = await Promise.all(
+  Object.entries(images).map(async ([path, resolver]) => {
+    const image: any = await resolver();
+    const filename = path.split('/').pop()?.split('.')[0] || 'Photo';
+    
+    // Create optimized thumbnail
+    const optimizedImage = await getImage({
+      src: image.default,
+      width: 400,
+      quality: 80,
+      format: 'webp'
+    });
+    
+    return {
+      src: optimizedImage.src,
+      alt: filename,
+      original: image.default.src,
+      width: optimizedImage.attributes.width,
+      height: optimizedImage.attributes.height
+    };
+  })
+);
+---
+
+<PageLayout>
+  <PageMeta title={`Photography | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main">
+    <h1 class="text-2xl font-semibold mb-2 text-center">Some of My Favorites...</h1>
+    <p class="text-base text-center mb-6 text-gray-600">Wannabe wildlife photographer. Canon EOS R10, mixed lenses.</p>
+    
+    <div class="photo-grid">
+      {imageList.map((image) => {
+        const aspectRatio = image.width / image.height;
+        const isPanorama = aspectRatio > 2; // Wide panoramic images
+        return (
+          <div class={`photo-item ${isPanorama ? 'panorama' : ''}`}>
+            <img 
+              src={image.src} 
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              loading="lazy"
+              class="photo-image"
+              data-original={image.original}
+            />
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Fullsize image overlay -->
+    <div id="imageOverlay" class="image-overlay">
+      <img id="overlayImage" class="overlay-content" onclick="closeOverlay()" />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .photo-grid {
+    column-count: 3;
+    column-gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .photo-item {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+    break-inside: avoid;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .photo-item.panorama {
+    column-span: all;
+    margin-bottom: 1rem;
+  }
+
+  .photo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .photo-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Fullsize overlay styles */
+  .image-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .photo-grid {
+      column-count: 2;
+      column-gap: 0.5rem;
+    }
+    
+    .overlay-content {
+      max-width: 98%;
+      max-height: 98%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .photo-grid {
+      column-count: 1;
+      column-gap: 0;
+    }
+  }
+</style>
+
+<script>
+  function toggleImageSize(imageSrc) {
+    const overlay = document.getElementById('imageOverlay');
+    const overlayImg = document.getElementById('overlayImage');
+    
+    if (overlay && overlayImg) {
+      if (overlay.style.display === 'block') {
+        // Close overlay
+        closeOverlay();
+      } else {
+        // Open overlay
+        overlay.style.display = 'block';
+        if (overlayImg instanceof HTMLImageElement) {
+          overlayImg.src = imageSrc;
+        }
+      }
+    }
+  }
+
+  function closeOverlay() {
+    const overlay = document.getElementById('imageOverlay');
+    if (overlay) {
+      overlay.style.display = 'none';
+    }
+  }
+
+  // Add click event listeners to all images
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.photo-image');
+    images.forEach(function(img) {
+      img.addEventListener('click', function() {
+        const originalSrc = this.getAttribute('data-original');
+        toggleImageSize(originalSrc);
+      });
+    });
+  });
+
+  // Close overlay when clicking on the overlay background
+  document.getElementById('imageOverlay')?.addEventListener('click', function(event) {
+    if (event.target === this) {
+      closeOverlay();
+    }
+  });
+
+  // Close overlay with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeOverlay();
+    }
+  });
+</script>
